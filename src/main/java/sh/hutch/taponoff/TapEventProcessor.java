@@ -1,7 +1,5 @@
 package sh.hutch.taponoff;
 
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -56,7 +54,7 @@ public class TapEventProcessor {
     try {
       return Optional.of(parser.parse(line));
     } catch (TapEventParseException e) {
-      System.err.println(String.format("Unable to parse input \"%s\": %s", line, e.getMessage()));
+      System.err.printf("Unable to parse input \"%s\": %s%n", line, e.getMessage());
       return Optional.empty();
     }
   }
