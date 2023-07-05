@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TapEventParser {
 
-  private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+  public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
   /**
    * Parses a single line of input into a TapEvent
@@ -17,8 +17,9 @@ public class TapEventParser {
    */
   public TapEvent parse(String line) throws TapEventParseException {
     try {
-      // Tokenize the line and strip off whitespace
-      List<String> fields = Arrays.stream(line.split(",")).map(String::trim).toList();
+      // Tokenize the line and strip off whitespace, no empty fields
+      List<String> fields = Arrays.stream(line.split(",")).map(String::trim)
+          .filter(s -> s.length() > 0).toList();
 
       // Must be 7 fields
       if (fields.size() != 7) {
@@ -27,7 +28,7 @@ public class TapEventParser {
 
       // Handling each field
       int id = Integer.parseInt(fields.get(0));
-      LocalDateTime timestamp = LocalDateTime.parse(fields.get(1), formatter);
+      LocalDateTime timestamp = LocalDateTime.parse(fields.get(1), FORMATTER);
       TapType type = TapType.valueOf(fields.get(2));
       String stopId = fields.get(3);
       String companyId = fields.get(4);

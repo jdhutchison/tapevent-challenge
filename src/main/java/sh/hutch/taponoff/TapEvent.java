@@ -25,13 +25,18 @@ public record TapEvent
    * @return an integer indicating the relative order of the events
    */
   @Override
-      public int compareTo(TapEvent other) {
-        if (!this.timestamp.isEqual(other.timestamp)) {
-          return this.id.compareTo(other.id);
-        } else if (!this.stopId.equals(other.stopId)) {
-          return this.stopId.compareTo(other.stopId);
-        } else {
-          return this.type.compareTo(other.type);
-        }
-      }
+  public int compareTo(TapEvent other) {
+    if (!this.timestamp.isEqual(other.timestamp)) {
+      return this.id.compareTo(other.id);
+    } else if (!this.stopId.equals(other.stopId)) {
+      return this.stopId.compareTo(other.stopId);
+    } else {
+      return this.type.compareTo(other.type);
+    }
   }
+
+  public String toString() {
+    String dateTime = timestamp.format(TapEventParser.FORMATTER);
+    return String.format("%s, %s, %s, %s, %s, %s, %s", id, dateTime, type, stopId, companyId, busId, pan);
+  }
+}
