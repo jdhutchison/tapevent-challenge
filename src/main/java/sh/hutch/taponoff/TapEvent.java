@@ -27,7 +27,7 @@ public record TapEvent
   @Override
   public int compareTo(TapEvent other) {
     if (!this.timestamp.isEqual(other.timestamp)) {
-      return this.id.compareTo(other.id);
+      return this.timestamp.compareTo(other.timestamp);
     } else if (!this.stopId.equals(other.stopId)) {
       return this.stopId.compareTo(other.stopId);
     } else {
