@@ -17,3 +17,9 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.jar {
+    manifest.attributes["Implementation-Title"] = "Tap Event Processor"
+    manifest.attributes["Main-Class"] = "sh.hutch.taponoff.Main"
+    archiveFileName.set("tap-event-processor.jar")
+}
